@@ -1,0 +1,64 @@
+<div class='sidenav'>
+  <span (click)='showForm()'>New Sport</span>
+</div>
+<div class="dash-lay">
+
+<div class="title">
+    <h1>{{title}}</h1>
+</div>
+
+<div class="content">
+<div>
+<h3>Sports</h3>
+</div>
+<div *ngIf="newSportB" class="new-sport">
+    <form [formGroup]="newSportForm" (ngSubmit)="onSubmit(newSportForm.value)">
+
+        <div>
+          <label for="name">
+            Name:
+          </label>
+          <input id="name" type="text" formControlName="name">
+        </div>
+
+        <div>
+          <label for="description">
+            Description:
+          </label>
+          <input id="description" type="text" formControlName="description">
+        </div>
+        <div class="form-image">
+          <div>
+            <label for="image">
+              Image:
+            </label>
+            <input id="image" type="text" formControlName="image">
+          </div>
+            <div class="available-images">
+              <span>Select an image: </span>
+              <div class="image-set">
+<div *ngFor="let image of available_images" class="image">
+  <img [src]="image.src" (click)="setImage(image.src)">
+<!-- <span>{{image.src}}</span> -->
+</div>
+</div>
+            </div>
+          </div>
+          <input type="submit" value="Create">
+        <!-- <button class="button" type="submit">Create</button> -->
+
+      </form>
+</div>
+<div class="sport-card-container">
+    <a (click)='loadSport(sport)' *ngFor='let sport of sports | async'><div class="sport sport-card">
+        <div class="sport-image">
+          <img [src]="sport.image">
+        </div>
+        <div class="sport-info">
+            <span>{{sport.name}}</span>
+            <span>{{sport.description}}</span>
+          </div>
+      </div></a>
+</div>
+</div>
+</div>
